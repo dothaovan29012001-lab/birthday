@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Khanh 🎂</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #fff5f0 0%, #ffe8dc 50%, #ffd4c4 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Mây bồng bềnh */
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 100px;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .cloud:before, .cloud:after {
+            content: '';
+            position: absolute;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 100px;
+        }
+
+        .cloud1 {
+            width: 100px;
+            height: 40px;
+            top: 10%;
+            left: -100px;
+            animation: moveCloud1 25s linear infinite;
+        }
+
+        .cloud1:before {
+            width: 50px;
+            height: 50px;
+            top: -25px;
+            left: 10px;
+        }
+
+        .cloud1:after {
+            width: 60px;
+            height: 40px;
+            top: -15px;
+            right: 10px;
+        }
+
+        .cloud2 {
+            width: 120px;
+            height: 45px;
+            top: 30%;
+            left: -150px;
+            animation: moveCloud2 30s linear infinite;
+        }
+
+        .cloud2:before {
+            width: 60px;
+            height: 60px;
+            top: -30px;
+            left: 15px;
+        }
+
+        .cloud2:after {
+            width: 70px;
+            height: 45px;
+            top: -20px;
+            right: 15px;
+        }
+
+        .cloud3 {
+            width: 90px;
+            height: 35px;
+            top: 60%;
+            left: -120px;
+            animation: moveCloud3 28s linear infinite;
+        }
+
+        .cloud3:before {
+            width: 45px;
+            height: 45px;
+            top: -20px;
+            left: 10px;
+        }
+
+        .cloud3:after {
+            width: 55px;
+            height: 35px;
+            top: -15px;
+            right: 10px;
+        }
+
+        @keyframes moveCloud1 {
+            0% { left: -150px; }
+            100% { left: 110%; }
+        }
+
+        @keyframes moveCloud2 {
+            0% { left: -200px; }
+            100% { left: 110%; }
+        }
+
+        @keyframes moveCloud3 {
+            0% { left: -180px; }
+            100% { left: 110%; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* Container cho từng page */
+        .page {
+            min-height: 100vh;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .page.active {
+            display: flex;
+        }
+
+        .content {
+            max-width: 600px;
+            width: 100%;
+        }
+
+        /* Page 1 - Welcome */
+        .welcome-box {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 60px 40px;
+            border-radius: 30px;
+            text-align: center;
+            box-shadow: 0 15px 50px rgba(255, 107, 107, 0.3);
+            animation: scaleIn 1s ease;
+        }
+
+        .welcome-box h1 {
+            font-size: 3em;
+            color: #ff6b6b;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: bounce 1s ease infinite;
+        }
+
+        .welcome-box .subtitle {
+            font-size: 1.4em;
+            color: #ff8c69;
+            margin-bottom: 30px;
+        }
+
+        .welcome-box .hint {
+            color: #999;
+            font-size: 1em;
+            margin-top: 30px;
+        }
+
+        .start-button {
+            background: linear-gradient(135deg, #ff9a76, #ff6b6b);
+            color: white;
+            border: none;
+            padding: 18px 50px;
+            font-size: 1.3em;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+            transition: all 0.3s;
+            margin-top: 20px;
+            font-weight: 600;
+        }
+
+        .start-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(255, 107, 107, 0.5);
+        }
+
+        .start-button:active {
+            transform: translateY(0);
+        }
+
+        /* Page 2 - Countdown */
+        .countdown-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 50px 40px;
+            border-radius: 30px;
+            box-shadow: 0 15px 50px rgba(255, 107, 107, 0.3);
+        }
+
+        .countdown-container h2 {
+            text-align: center;
+            color: #ff7f50;
+            font-size: 2em;
+            margin-bottom: 30px;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .countdown-item {
+            background: linear-gradient(135deg, #fff, #ffe8dc);
+            padding: 25px 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(255, 140, 105, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .countdown-item:hover {
+            transform: scale(1.05);
+        }
+
+        .countdown-number {
+            font-size: 3em;
+            font-weight: bold;
+            color: #ff6b6b;
+            display: block;
+        }
+
+        .countdown-label {
+            font-size: 1.1em;
+            color: #ff8c69;
+            margin-top: 10px;
+        }
+
+        .photo-preview {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .photo-preview img {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+            border: 5px solid rgba(255, 255, 255, 0.9);
+        }
+
+        /* Page 3 - Message */
+        .message-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 50px 40px;
+            border-radius: 30px;
+            box-shadow: 0 15px 50px rgba(255, 107, 107, 0.3);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .message-container h2 {
+            text-align: center;
+            color: #ff6b6b;
+            font-size: 2.2em;
+            margin-bottom: 30px;
+        }
+
+        .message-container p {
+            color: #555;
+            font-size: 1.15em;
+            margin-bottom: 25px;
+            line-height: 1.9;
+            text-align: justify;
+            animation: slideIn 0.8s ease;
+        }
+
+        .signature {
+            text-align: right;
+            color: #ff7f50;
+            font-style: italic;
+            margin-top: 40px;
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+
+        /* Navigation buttons */
+        .nav-buttons {
+            text-align: center;
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-button {
+            background: linear-gradient(135deg, #ff9a76, #ff6b6b);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.5);
+        }
+
+        .nav-button.secondary {
+            background: linear-gradient(135deg, #ffc4a3, #ff9a76);
+        }
+
+        /* Music button */
+        .music-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #ff9a76, #ff6b6b);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 30px;
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.5);
+            z-index: 1000;
+            transition: transform 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .music-button:hover {
+            transform: scale(1.1) rotate(15deg);
+        }
+
+        .music-button.playing {
+            animation: pulse 1.5s infinite;
+        }
+
+        /* Heart animation */
+        .heart {
+            position: fixed;
+            font-size: 35px;
+            animation: floatHeart 4s ease-in forwards;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        @keyframes floatHeart {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(0) rotate(0deg);
+            }
+            50% {
+                transform: scale(1.2) rotate(180deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-1000px) scale(0.5) rotate(360deg);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .welcome-box h1 {
+                font-size: 2.2em;
+            }
+            
+            .countdown-number {
+                font-size: 2.2em;
+            }
+            
+            .message-container, .welcome-box, .countdown-container {
+                padding: 30px 25px;
+            }
+            
+            .start-button, .nav-button {
+                padding: 15px 35px;
+                font-size: 1em;
+            }
+
+            .music-button {
+                width: 60px;
+                height: 60px;
+                font-size: 26px;
+            }
+        }
+
+        /* Scroll hint */
+        .scroll-hint {
+            text-align: center;
+            color: #ff8c69;
+            font-size: 0.9em;
+            margin-top: 15px;
+            animation: bounce 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Mây bồng bềnh -->
+    <div class="cloud cloud1"></div>
+    <div class="cloud cloud2"></div>
+    <div class="cloud cloud3"></div>
+
+    <!-- Nút nhạc -->
+    <button class="music-button" onclick="toggleMusic()" id="musicBtn">🎵</button>
+
+    <!-- PAGE 1: Welcome -->
+    <div class="page active" id="page1">
+        <div class="content">
+            <div class="welcome-box">
+                <h1>🎂 HAPPY BIRTHDAY! 🎂</h1>
+                <div class="subtitle">✨ Chúc mừng sinh nhật Khanh iuuu ✨</div>
+                <p style="font-size: 1.2em; color: #666; margin: 20px 0;">
+                    Hôm nay là ngày đặc biệt của Khánh đó! 🎉<br>
+                    Em có một món quà nhỏ dành cho Khánh nèee~
+                </p>
+                <button class="start-button" onclick="startExperience()">
+                    Mở quà thôi! 🎁
+                </button>
+                <div class="hint">💡 Nhớ bật âm thanh để trải nghiệm tốt nhất nhaa</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 2: Countdown -->
+    <div class="page" id="page2">
+        <div class="content">
+            <div class="countdown-container">
+                <h2>💕 Chúng mình đã yêu nhau được...</h2>
+                <div class="countdown" id="countdown">
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="years">0</span>
+                        <div class="countdown-label">năm</div>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="months">0</span>
+                        <div class="countdown-label">tháng</div>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="days">0</span>
+                        <div class="countdown-label">ngày</div>
+                    </div>
+                </div>
+                <div class="photo-preview">
+                    <img src="https://i.imgur.com/placeholder.jpg" alt="Van & Khanh" onerror="this.style.display='none'">
+                </div>
+                <p style="text-align: center; color: #666; margin-top: 25px; font-size: 1.1em;">
+                    Kể từ ngày 17/12/2023, đến hôm nay...<br>
+                    Mỗi ngày trôi qua đều là kỷ niệm đáng nhớ với em 💖
+                </p>
+                <div class="nav-buttons">
+                    <button class="nav-button secondary" onclick="goToPage(1)">⬅️ Quay lại</button>
+                    <button class="nav-button" onclick="goToPage(3)">Tiếp theo ➡️</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 3: Message -->
+    <div class="page" id="page3">
+        <div class="content">
+            <div class="message-container">
+                <h2>💌 Lời nhắn của em gửi Khánh</h2>
+                
+                <p>🎉 Thêm tuổi mới, em chúc Khánh luôn vui vẻ, luôn đắt job dự án để kiếm được nhiều xiền nuôi em nhaaa~ Mong Khánh luôn thuận lợi trong công việc và cuộc sống, mọi thứ đều suôn sẻ như ý 💪✨</p>
+
+                <p>🎁 À mà... quà sinh nhật tuổi 24 này, em muốn mình cùng mở quà, nên là Khánh đừng buồn vì chưa nhận được quà ngay nhé hihi. Nhanh sang đây với em để unbox quà cùng nhau nàoo~ 🎀</p>
+
+                <p>🥺 Có một chút buồn vì không thể ở bên đón sinh nhật tuổi mới cùng Khánh. Nhưng không sao, nghĩ đến việc hôm nay em được ăn bánh sinh nhật Khánh tặng là em vui lắm ^^ (haha em đùa chút thôi đấy)</p>
+
+                <p>💗 Em yêu Khánh nhiều, nhiều hơn ngày hôm qua một chút, nhiều hơn ngày hôm kia nhiều chút~ Gửi tới Khánh nhiều cái ôm thật chặt... umm... 🤗</p>
+
+                <p>🌙 Thật ra Khánh biết mà, em luôn tỏ ra vui vẻ, không quan tâm Khánh, không nhớ Khánh khi yêu xa... Nhưng mà cứ mỗi lần mông lung xong tập trung suy nghĩ về Khánh là em lại nhớ, lại buồn, lại có chút tủi thân xíu đó... 🥹</p>
+
+                <p>🌸 Em nhớ cái thơm của Khánh, nhớ vòng tay ôm của Khánh lắm. Nhớ từng khoảnh khắc bé xíu mà mình ở bên nhau ấy...</p>
+
+                <p>🎂 Một lần nữa, chúc mừng sinh nhật Khánh nhé! 24 tuổi rồi đó, trưởng thành hơn, đẹp trai hơn (uhm đúng rồi đó), nhưng vẫn là Khánh của em Pon, của em cún ngốc này thôi nhaa 🐶💕</p>
+
+                <div class="signature">
+                    — Em Pon của Khánh, em cún ngốc iuuu 🐾💖
+                </div>
+
+                <div class="scroll-hint">⬆️ Kéo lên để đọc lại nha ⬆️</div>
+
+                <div class="nav-buttons">
+                    <button class="nav-button secondary" onclick="goToPage(2)">⬅️ Quay lại</button>
+                    <button class="nav-button" onclick="goToPage(1)">🔄 Xem lại từ đầu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentPage = 1;
+        let isPlaying = false;
+        let audioContext;
+        let audioBuffer;
+        let source;
+
+        // Khởi tạo audio context
+        function initAudio() {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+
+        // Tải nhạc từ URL
+        async function loadMusic() {
+            try {
+                initAudio();
+                // Chuyển Google Drive link sang direct download link
+                const response = await fetch('https://drive.google.com/uc?export=download&id=1QpkDuRrfoK92nqv6Laotx5FNdO7PSRlP');
+                const arrayBuffer = await response.arrayBuffer();
+                audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+            } catch (error) {
+                console.log('Không thể tải nhạc:', error);
+            }
+        }
+
+        // Phát nhạc
+        function playMusic() {
+            if (!audioBuffer || !audioContext) return;
+            
+            if (source) {
+                source.stop();
+            }
+            
+            source = audioContext.createBufferSource();
+            source.buffer = audioBuffer;
+            source.loop = true;
+            source.connect(audioContext.destination);
+            source.start(0);
+            isPlaying = true;
+        }
+
+        // Dừng nhạc
+        function pauseMusic() {
+            if (source) {
+                source.stop();
+                source = null;
+                isPlaying = false;
+            }
+        }
+
+        // Toggle nhạc
+        function toggleMusic() {
+            const musicBtn = document.getElementById('musicBtn');
+            
+            if (!audioContext) {
+                initAudio();
+                loadMusic().then(() => {
+                    playMusic();
+                    musicBtn.classList.add('playing');
+                    musicBtn.textContent = '🎶';
+                });
+            } else if (isPlaying) {
+                pauseMusic();
+                musicBtn.classList.remove('playing');
+                musicBtn.textContent = '🎵';
+            } else {
+                if (audioContext.state === 'suspended') {
+                    audioContext.resume();
+                }
+                playMusic();
+                musicBtn.classList.add('playing');
+                musicBtn.textContent = '🎶';
+            }
+        }
+
+        // Bắt đầu trải nghiệm
+        function startExperience() {
+            // Tự động phát nhạc khi bắt đầu
+            if (!isPlaying) {
+                toggleMusic();
+            }
+            goToPage(2);
+        }
+
+        // Chuyển trang
+        function goToPage(pageNum) {
+            document.getElementById('page' + currentPage).classList.remove('active');
+            document.getElementById('page' + pageNum).classList.add('active');
+            currentPage = pageNum;
+            window.scrollTo(0, 0);
+        }
+
+        // Đếm ngược thời gian yêu nhau
+        function updateCountdown() {
+            const startDate = new Date('2023-12-17');
+            const now = new Date();
+            
+            let years = now.getFullYear() - startDate.getFullYear();
+            let months = now.getMonth() - startDate.getMonth();
+            let days = now.getDate() - startDate.getDate();
+
+            if (days < 0) {
+                months--;
+                const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+                days += prevMonth.getDate();
+            }
+
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+
+            document.getElementById('years').textContent = years;
+            document.getElementById('months').textContent = months;
+            document.getElementById('days').textContent = days;
+        }
+
+        updateCountdown();
+
+        // Tạo hiệu ứng tim bay
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.textContent = ['💕', '💖', '💗', '💓', '💝', '💞'][Math.floor(Math.random() * 6)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.bottom = '0';
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 4000);
+        }
+
+        // Tạo tim bay định kỳ
+        setInterval(createHeart, 2500);
+        createHeart();
+
+        // Preload nhạc khi trang load
+        window.addEventListener('load', () => {
+            initAudio();
+            loadMusic();
+        });
+    </script>
+</body>
+</html>
